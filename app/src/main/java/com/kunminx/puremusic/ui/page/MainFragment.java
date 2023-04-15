@@ -157,6 +157,12 @@ public class MainFragment extends BaseFragment {
 //      audioRecorder.release();
       Log.i("record", "stopRecord");
     }
+
+
+    public void getPcmFiles() {
+      checkInstance();
+      audioRecorder.getPcmFiles();
+    }
   }
 
 

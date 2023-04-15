@@ -20,6 +20,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.app.ActivityCompat;
@@ -31,9 +32,12 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.ui.page.StateHolder;
 import com.kunminx.architecture.ui.state.State;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 import com.kunminx.puremusic.domain.event.Messages;
 import com.kunminx.puremusic.domain.message.DrawerCoordinateManager;
 import com.kunminx.puremusic.domain.message.PageMessenger;
+
+import java.io.File;
 
 /**
  * Create by KunMinX at 19/10/16
@@ -42,6 +46,7 @@ import com.kunminx.puremusic.domain.message.PageMessenger;
 public class MainActivity extends BaseActivity {
   private MainActivityStates mStates;
   private PageMessenger mMessenger;
+
   private boolean mIsListened = false;
 //  public final String APP_FILE_PATH = getApplicationContext().getFilesDir().getAbsolutePath();
 
@@ -85,7 +90,7 @@ public class MainActivity extends BaseActivity {
 
     //
     verifyPermissions(this);
-    //
+    ConfigValue.APP_AUDIO_PATH = this.getFilesDir() + "/";
   }
 
 
@@ -110,7 +115,7 @@ public class MainActivity extends BaseActivity {
         GET_RECODE_AUDIO);
     }
 
-//    String appPath =  activity.getFilesDir();
+
   }
 
 

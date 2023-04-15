@@ -1,5 +1,7 @@
 package com.kunminx.puremusic.data.record;
 
+import static net.steamcrafted.materialiconlib.MaterialDrawableBuilder.IconValue.JSON;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioFormat;
@@ -126,6 +128,10 @@ public class AudioRecorder {
     }).start();
   }
 
+
+
+
+
   /**
    * 暂停录音
    */
@@ -153,6 +159,23 @@ public class AudioRecorder {
     }
   }
 
+
+
+  public void getPcmFiles() {
+    Log.d("AudioRecorder", "===getPcmFiles===");
+    try {
+      List<File> fileList = FileUtil.getPcmFiles();
+      Log.d("AudioRecorder", fileList.get(0).getParent());
+      for (int i=0; i<fileList.size(); i++) {
+        System.out.println(fileList.get(i).getName());
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+
   /**
    * 释放资源
    */
@@ -168,7 +191,7 @@ public class AudioRecorder {
         //清除
         filesName.clear();
         //将多个pcm文件转化为wav文件
-        mergePCMFilesToWAVFile(filePaths);
+//        mergePCMFilesToWAVFile(filePaths);
 
       } else {
         //这里由于只要录音过filesName.size都会大于0,没录音时fileName为null
@@ -211,19 +234,19 @@ public class AudioRecorder {
    */
   private void writeDataTOFile(RecordStreamListener listener) {
     //
-    File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/LinkTestFolder");
-    if (!folder.exists()) {
-      if (folder.mkdirs()) {
-        // Folder created successfully
-        Log.i("LinkTestFolder", "Folder created successfully");
-      } else {
-        // Failed to create folder
-        Log.i("LinkTestFolder", "Folder created Failed");
-      }
-    } else {
-      // Folder already exists
-      Log.i("LinkTestFolder", "Folder already exists");
-    }
+//    File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/LinkTestFolder");
+//    if (!folder.exists()) {
+//      if (folder.mkdirs()) {
+//        // Folder created successfully
+//        Log.i("LinkTestFolder", "Folder created successfully");
+//      } else {
+//        // Failed to create folder
+//        Log.i("LinkTestFolder", "Folder created Failed");
+//      }
+//    } else {
+//      // Folder already exists
+//      Log.i("LinkTestFolder", "Folder already exists");
+//    }
     //
 
     //DIRECTORY_PODCASTS
@@ -246,7 +269,7 @@ public class AudioRecorder {
 
       }
       filesName.add(currentFileName);
-      String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "WatchMan";
+//      String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "WatchMan";
       File file = new File(FileUtil.getPcmFileAbsolutePath(currentFileName));
       if (file.exists()) {
         file.delete();

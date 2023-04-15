@@ -3,6 +3,10 @@ package com.kunminx.puremusic.data.record;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.kunminx.puremusic.MainActivity;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +30,11 @@ public class FileUtil {
     FileUtil.rootPath = rootPath;
   }
 
+  /**
+   * 获取应用文件夹路径
+   * @param fileName
+   * @return
+   */
   public static String getPcmFileAbsolutePath(String fileName) {
     if (TextUtils.isEmpty(fileName)) {
       throw new NullPointerException("fileName isEmpty");
@@ -42,13 +51,15 @@ public class FileUtil {
       //
 //      String fileBasePath = Environment.DIRECTORY_PODCASTS;
 //      Context.getExternalFilesDir();
-      String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AUDIO_PCM_BASEPATH;
+      String fileBasePath = ConfigValue.APP_AUDIO_PATH;
+//      String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AUDIO_PCM_BASEPATH;
       File file = new File(fileBasePath);
       //创建目录
       if (!file.exists()) {
         file.mkdirs();
       }
       mAudioRawPath = fileBasePath + fileName;
+      Log.i("AudioRecorder", "mAudioRawPath=" + mAudioRawPath);
     }
 
     return mAudioRawPath;
@@ -97,7 +108,8 @@ public class FileUtil {
    */
   public static List<File> getPcmFiles() {
     List<File> list = new ArrayList<>();
-    String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AUDIO_PCM_BASEPATH;
+    String fileBasePath = ConfigValue.APP_AUDIO_PATH;
+//    String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AUDIO_PCM_BASEPATH;
 
     File rootFile = new File(fileBasePath);
     if (!rootFile.exists()) {

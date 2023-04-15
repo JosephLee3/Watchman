@@ -207,6 +207,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+          <Button
+            android:text="Get Pcm Files"
+            onClickWithDebouncing="@{()->click.getPcmFiles()}"
+            android:layout_margin="31dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
           <!--<TextView
             android:id="@+id/record_tip"
             android:text="Waiting"
