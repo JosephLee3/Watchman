@@ -35,6 +35,10 @@ public class MusicRequester extends ViewModel {
     return mFreeMusicsResult;
   }
 
+  public void requestAudioList() {
+    DataRepository.getInstance().getAudioList(mFreeMusicsResult::setValue);
+  }
+
   public void requestFreeMusics() {
     DataRepository.getInstance().getFreeMusic(mFreeMusicsResult::setValue);
   }

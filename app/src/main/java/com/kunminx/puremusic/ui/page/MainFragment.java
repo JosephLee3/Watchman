@@ -163,6 +163,19 @@ public class MainFragment extends BaseFragment {
       checkInstance();
       audioRecorder.getPcmFiles();
     }
+
+
+    public void playPcmFile() {
+      checkInstance();
+      String pcmFileName = "20230417_115620.pcm";
+      if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
+        audioRecorder.playPcmFile(pcmFileName);
+      } else {
+        Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
+      }
+    }
+
+
   }
 
 

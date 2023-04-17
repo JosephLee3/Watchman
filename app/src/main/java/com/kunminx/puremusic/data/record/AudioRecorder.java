@@ -307,6 +307,12 @@ public class AudioRecorder {
     }
   }
 
+
+  public void playPcmFile(String pcmFileName) {
+    PlayPCM mPlayPCM = new PlayPCM();
+    mPlayPCM.playPcmFile(pcmFileName);
+  }
+
   /**
    * 将pcm合并成wav
    *
@@ -380,6 +386,7 @@ public class AudioRecorder {
     //停止
     STATUS_STOP
   }
+
 
 
 

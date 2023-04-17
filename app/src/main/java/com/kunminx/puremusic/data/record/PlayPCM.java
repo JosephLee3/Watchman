@@ -18,9 +18,15 @@ public class PlayPCM {
   AudioTrack audioTrack;
   Boolean isPlaying = false;
   Boolean isStop = false;
+  String pcmFileName = ""; //20230417_115620.pcm
 
-  // 文件路径名称
-  String path = ConfigValue.APP_AUDIO_PATH;
+
+
+  public void playPcmFile(String pcmFileName) {
+    this.pcmFileName = pcmFileName;
+    Runnable playPCMRecord = this.playPCMRecord;
+    playPCMRecord.run();
+  }
 
 
 
@@ -35,7 +41,7 @@ public class PlayPCM {
       FileInputStream fis = null;
       try {
         audioTrack.play();
-        fis = new FileInputStream(path);
+        fis = new FileInputStream(ConfigValue.APP_AUDIO_PATH + pcmFileName);
         byte[] buffer = new byte[bufferSize];
         int len = 0;
         isPlaying = true;
@@ -43,6 +49,9 @@ public class PlayPCM {
 //                    Log.d(TAG, "playPCMRecord: len " + len);
           audioTrack.write(buffer, 0, len);
         }
+        Log.i("PlayPcm : ", "-------------------------------------");
+        Log.i("PlayPcm : ", "Pcm File is Playing.");
+        Log.i("PlayPcm : ", "-------------------------------------");
 
       } catch (Exception e) {
         Log.e(TAG, "playPCMRecord: e : " + e);

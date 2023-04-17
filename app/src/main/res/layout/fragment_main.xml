@@ -214,6 +214,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+          <Button
+            android:text="Play Pcm File"
+            onClickWithDebouncing="@{()->click.playPcmFile()}"
+            android:layout_margin="31dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
 
           <!--<TextView

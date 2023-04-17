@@ -36,6 +36,7 @@ import com.kunminx.puremusic.data.bean.User;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -81,6 +82,33 @@ public class DataRepository {
       .addConverterFactory(GsonConverterFactory.create())
       .build();
   }
+
+
+  /**
+   * getAudioList
+   *
+   * @param result
+   */
+  public void getAudioList(DataResult.Result<TestAlbum> result) {
+
+    Gson gson = new Gson();
+    Type type = new TypeToken<TestAlbum>() {
+    }.getType();
+    TestAlbum testAlbum = gson.fromJson(Utils.getApp().getString(R.string.free_music_json), type);
+//    testAlbum.setAlbumId("001");
+//    testAlbum.setTitle("Cute");
+//    testAlbum.setSummary("BenSound");
+//    testAlbum.setArtist(null);
+//    testAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+
+    // music
+//    List<M> musics = new ArrayList<M>();
+//    testAlbum.setMusics(musics);
+
+    result.onResult(new DataResult<>(testAlbum, new ResponseStatus()));
+  }
+
+
 
   public void getFreeMusic(DataResult.Result<TestAlbum> result) {
 
