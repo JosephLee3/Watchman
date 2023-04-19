@@ -20,6 +20,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -38,6 +39,8 @@ import com.kunminx.puremusic.domain.message.DrawerCoordinateManager;
 import com.kunminx.puremusic.domain.message.PageMessenger;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Create by KunMinX at 19/10/16
@@ -65,6 +68,12 @@ public class MainActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    //
+    verifyPermissions(this);
+//    ConfigValue.APP_AUDIO_PATH = this.getWatchmanPath();
+//    ConfigValue.APP_AUDIO_PATH = this.getFilesDir() + "/";
+    System.out.println("---------------->" + ConfigValue.APP_AUDIO_PATH);
     mMessenger.output(this, messages -> {
       switch (messages.eventId) {
         case Messages.EVENT_CLOSE_ACTIVITY_IF_ALLOWED:
@@ -86,26 +95,17 @@ public class MainActivity extends BaseActivity {
     DrawerCoordinateManager.getInstance().isEnableSwipeDrawer().observe(this, aBoolean -> {
       mStates.allowDrawerOpen.set(aBoolean);
     });
-
-
-    //
-    verifyPermissions(this);
-    ConfigValue.APP_AUDIO_PATH = this.getFilesDir() + "/";
+    this.getWatchmanPath();
   }
 
 
-  //申请权限
-
+  /** 申请权限*/
   private static final int GET_RECODE_AUDIO = 1;
-
   private static String[] PERMISSION_ALL = {
     Manifest.permission.RECORD_AUDIO,
     Manifest.permission.WRITE_EXTERNAL_STORAGE,
     Manifest.permission.READ_EXTERNAL_STORAGE,
   };
-
-
-  /** 申请权限*/
   public static void verifyPermissions(Activity activity) {
     boolean permission = (ActivityCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
       || (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
@@ -114,9 +114,34 @@ public class MainActivity extends BaseActivity {
       ActivityCompat.requestPermissions(activity, PERMISSION_ALL,
         GET_RECODE_AUDIO);
     }
-
-
   }
+
+
+  /**
+   * getWatchmanPath
+   * @return
+   */
+  private  String  getWatchmanPath() {
+//    //
+//    Environment.DIRECTORY_RECORDINGS
+    //
+    // 要創建的目錄名稱
+    String dirName = "Watchman";
+    // 獲取公共音頻路徑
+    File recordingsDirectory = null;
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+      recordingsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RECORDINGS);
+    }
+    // 創建目錄對象
+    File myDir = new File(recordingsDirectory, dirName);
+    // 如果目錄不存在，則創建目錄
+    if (!myDir.exists()) {
+      myDir.mkdir();
+    }
+    return myDir.getPath() + "/";
+  }
+
+
 
 
 

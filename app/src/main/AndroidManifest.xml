@@ -9,8 +9,9 @@
 
   <!--  内存卡的读取权限-->
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-    tools:ignore="ScopedStorage" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!--  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
+<!--    tools:ignore="ScopedStorage" />-->
   <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
@@ -25,6 +26,7 @@
   <!--Android 13版本适配，细化存储权限-->
   <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
   <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+  <uses-permission android:name="android.permission.WRITE_MEDIA_AUDIO" />
   <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
   <application
@@ -38,7 +40,8 @@
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
-    tools:replace="android:name">
+    tools:replace="android:name"
+    android:requestLegacyExternalStorage="true">
 
     <activity
       android:name=".MainActivity"

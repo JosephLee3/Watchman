@@ -94,7 +94,7 @@ public class MainFragment extends BaseFragment {
       }
     });
 
-    if (PlayerManager.getInstance().getAlbum() == null) mMusicRequester.requestFreeMusics();
+    if (PlayerManager.getInstance().getAlbum() == null) mMusicRequester.requestAudioList ();
   }
 
   public class ClickProxy {

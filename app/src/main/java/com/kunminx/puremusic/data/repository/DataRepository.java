@@ -32,9 +32,11 @@ import com.kunminx.puremusic.data.bean.DownloadState;
 import com.kunminx.puremusic.data.bean.LibraryInfo;
 import com.kunminx.puremusic.data.bean.TestAlbum;
 import com.kunminx.puremusic.data.bean.User;
+import com.kunminx.puremusic.data.record.FileUtil;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,28 +86,96 @@ public class DataRepository {
   }
 
 
+
   /**
    * getAudioList
    *
+   * Audio Name: DateTime Timestamp, location X Y,
+   * 14506545456545546_FD544505545454545_45454655454
+   * 14506545456545546_null
+   *
+   * Photo:Current Photo FRONT CAM, photo name: one same
    * @param result
    */
   public void getAudioList(DataResult.Result<TestAlbum> result) {
+    List<File> pcmFileList = null;
 
-    Gson gson = new Gson();
-    Type type = new TypeToken<TestAlbum>() {
-    }.getType();
-    TestAlbum testAlbum = gson.fromJson(Utils.getApp().getString(R.string.free_music_json), type);
-//    testAlbum.setAlbumId("001");
-//    testAlbum.setTitle("Cute");
-//    testAlbum.setSummary("BenSound");
-//    testAlbum.setArtist(null);
-//    testAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+    try {
+      pcmFileList = FileUtil.getPcmFiles();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-    // music
-//    List<M> musics = new ArrayList<M>();
-//    testAlbum.setMusics(musics);
+    // artistItem
+    TestAlbum.TestArtist artistItem = new TestAlbum.TestArtist();
+    artistItem.setName("Angle");
 
-    result.onResult(new DataResult<>(testAlbum, new ResponseStatus()));
+    // musicList
+    List<TestAlbum.TestMusic> musicList = new ArrayList<>();
+    // musicItem: 1
+    TestAlbum.TestMusic musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("001");
+    musicItem.setTitle("Tomorrow");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
+    // musicItem: 2
+    musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("002");
+    musicItem.setTitle("Sunny");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-8a7d311f2a758d4c.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
+    // musicItem: 3
+    musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("003");
+    musicItem.setTitle("Energy");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
+
+
+    // musicItem: 4 - 0
+    musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("004");
+    musicItem.setTitle("Studio");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
+
+    // pcmFile: 4
+    for (int i=0; i<pcmFileList.size(); i++) {
+      musicItem = new TestAlbum.TestMusic();
+      musicItem.setMusicId("00" + (i+5));
+      musicItem.setTitle(pcmFileList.get(0).getName());
+      musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+      musicItem.setUrl("bensound-sunny.mp3");
+      musicItem.setArtist(artistItem);
+      musicList.add(musicItem);
+
+
+
+
+
+      System.out.println(pcmFileList.get(0).getName());
+    }
+
+
+    // TestAlbum
+    TestAlbum mTestAlbum = new TestAlbum();
+    mTestAlbum.setAlbumId("001");
+    mTestAlbum.setTitle("Cute");
+    mTestAlbum.setSummary("BenSound");
+    mTestAlbum.setArtist(artistItem); // 灌入ArtistItem
+    mTestAlbum.setMusics(musicList); // MusicItem
+    mTestAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+
+
+    result.onResult(new DataResult<>(mTestAlbum, new ResponseStatus()));
   }
 
 
