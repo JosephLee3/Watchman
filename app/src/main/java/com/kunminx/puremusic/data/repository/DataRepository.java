@@ -112,30 +112,30 @@ public class DataRepository {
 
     // musicList
     List<TestAlbum.TestMusic> musicList = new ArrayList<>();
-    // musicItem: 1
-    TestAlbum.TestMusic musicItem = new TestAlbum.TestMusic();
-    musicItem.setMusicId("001");
-    musicItem.setTitle("Tomorrow");
-    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
-    musicItem.setUrl("bensound-sunny.mp3");
-    musicItem.setArtist(artistItem);
-    musicList.add(musicItem);
-    // musicItem: 2
-    musicItem = new TestAlbum.TestMusic();
-    musicItem.setMusicId("002");
-    musicItem.setTitle("Sunny");
-    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-8a7d311f2a758d4c.png");
-    musicItem.setUrl("bensound-sunny.mp3");
-    musicItem.setArtist(artistItem);
-    musicList.add(musicItem);
-    // musicItem: 3
-    musicItem = new TestAlbum.TestMusic();
-    musicItem.setMusicId("003");
-    musicItem.setTitle("Energy");
-    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-    musicItem.setUrl("bensound-sunny.mp3");
-    musicItem.setArtist(artistItem);
-    musicList.add(musicItem);
+    TestAlbum.TestMusic musicItem;
+//    // musicItem: 1
+//    musicItem.setMusicId("001");
+//    musicItem.setTitle("Tomorrow");
+//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+//    musicItem.setUrl("bensound-sunny.mp3");
+//    musicItem.setArtist(artistItem);
+//    musicList.add(musicItem);
+//    // musicItem: 2
+//    musicItem = new TestAlbum.TestMusic();
+//    musicItem.setMusicId("002");
+//    musicItem.setTitle("Sunny");
+//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-8a7d311f2a758d4c.png");
+//    musicItem.setUrl("bensound-sunny.mp3");
+//    musicItem.setArtist(artistItem);
+//    musicList.add(musicItem);
+//    // musicItem: 3
+//    musicItem = new TestAlbum.TestMusic();
+//    musicItem.setMusicId("003");
+//    musicItem.setTitle("Energy");
+//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+//    musicItem.setUrl("bensound-sunny.mp3");
+//    musicItem.setArtist(artistItem);
+//    musicList.add(musicItem);
 
 
     // musicItem: 4 - 0
@@ -148,20 +148,19 @@ public class DataRepository {
     musicList.add(musicItem);
 
     // pcmFile: 4
-    for (int i=0; i<pcmFileList.size(); i++) {
-      musicItem = new TestAlbum.TestMusic();
-      musicItem.setMusicId("00" + (i+5));
-      musicItem.setTitle(pcmFileList.get(0).getName());
-      musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-      musicItem.setUrl("bensound-sunny.mp3");
-      musicItem.setArtist(artistItem);
-      musicList.add(musicItem);
+    if (pcmFileList != null) {
+      for (int i=0; i<pcmFileList.size(); i++) {
+        musicItem = new TestAlbum.TestMusic();
+        musicItem.setMusicId("00" + (i+5));
+        musicItem.setTitle(pcmFileList.get(0).getName());
+        musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+        musicItem.setUrl("bensound-sunny.mp3");
+        musicItem.setArtist(artistItem);
+        musicList.add(musicItem);
 
 
-
-
-
-      System.out.println(pcmFileList.get(0).getName());
+        System.out.println(pcmFileList.get(0).getName());
+      }
     }
 
 
