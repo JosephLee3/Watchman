@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.kunminx.puremusic.MainActivity;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -155,6 +156,7 @@ public class AudioRecorder {
     } else {
       audioRecord.stop();
       status = Status.STATUS_STOP;
+      ConfigValue.AUDIO_FILE_NAME = ConfigValue.RECORDING_AUDIO_FILE_NAME;
       release();
     }
   }
@@ -168,6 +170,7 @@ public class AudioRecorder {
       Log.d("AudioRecorder", fileList.get(0).getParent());
       for (int i=0; i<fileList.size(); i++) {
         System.out.println(fileList.get(i).getName());
+        ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -275,6 +278,8 @@ public class AudioRecorder {
         file.delete();
       }
       fos = new FileOutputStream(file);// 建立一个可存取字节的文件
+      // RECORDING_AUDIO_FILE_NAME
+      ConfigValue.RECORDING_AUDIO_FILE_NAME = currentFileName + ".pcm";
     } catch (IllegalStateException e) {
       Log.e("AudioRecorder", e.getMessage());
       throw new IllegalStateException(e.getMessage());

@@ -34,6 +34,7 @@ import com.kunminx.puremusic.R;
 import com.kunminx.puremusic.data.bean.TestAlbum;
 import com.kunminx.puremusic.data.record.AudioRecorder;
 import com.kunminx.puremusic.data.record.RecordStreamListener;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 import com.kunminx.puremusic.domain.event.Messages;
 import com.kunminx.puremusic.domain.message.PageMessenger;
 import com.kunminx.puremusic.domain.request.MusicRequester;
@@ -167,7 +168,7 @@ public class MainFragment extends BaseFragment {
 
     public void playPcmFile() {
       checkInstance();
-      String pcmFileName = "20230417_115620.pcm";
+      String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
       if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
         audioRecorder.playPcmFile(pcmFileName);
       } else {
