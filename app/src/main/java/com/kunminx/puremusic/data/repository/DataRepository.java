@@ -33,6 +33,7 @@ import com.kunminx.puremusic.data.bean.LibraryInfo;
 import com.kunminx.puremusic.data.bean.TestAlbum;
 import com.kunminx.puremusic.data.bean.User;
 import com.kunminx.puremusic.data.record.FileUtil;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -112,22 +113,22 @@ public class DataRepository {
 
     // musicList
     List<TestAlbum.TestMusic> musicList = new ArrayList<>();
-    TestAlbum.TestMusic musicItem;
+    TestAlbum.TestMusic musicItem = null;
 //    // musicItem: 1
-//    musicItem.setMusicId("001");
-//    musicItem.setTitle("Tomorrow");
-//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
-//    musicItem.setUrl("bensound-sunny.mp3");
-//    musicItem.setArtist(artistItem);
-//    musicList.add(musicItem);
+    musicItem.setMusicId("001");
+    musicItem.setTitle("Tomorrow");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
 //    // musicItem: 2
-//    musicItem = new TestAlbum.TestMusic();
-//    musicItem.setMusicId("002");
-//    musicItem.setTitle("Sunny");
-//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-8a7d311f2a758d4c.png");
-//    musicItem.setUrl("bensound-sunny.mp3");
-//    musicItem.setArtist(artistItem);
-//    musicList.add(musicItem);
+    musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("002");
+    musicItem.setTitle("Sunny");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-8a7d311f2a758d4c.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
 //    // musicItem: 3
 //    musicItem = new TestAlbum.TestMusic();
 //    musicItem.setMusicId("003");
@@ -148,20 +149,19 @@ public class DataRepository {
     musicList.add(musicItem);
 
     // pcmFile: 4
-    if (pcmFileList != null) {
-      for (int i=0; i<pcmFileList.size(); i++) {
-        musicItem = new TestAlbum.TestMusic();
-        musicItem.setMusicId("00" + (i+5));
-        musicItem.setTitle(pcmFileList.get(0).getName());
-        musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-        musicItem.setUrl("bensound-sunny.mp3");
-        musicItem.setArtist(artistItem);
-        musicList.add(musicItem);
-
-
-        System.out.println(pcmFileList.get(0).getName());
-      }
-    }
+//    if (pcmFileList != null) {
+//      for (int i=0; i<pcmFileList.size(); i++) {
+//        musicItem = new TestAlbum.TestMusic();
+//        musicItem.setMusicId("00" + (i+5));
+//        musicItem.setTitle(pcmFileList.get(i).getName().replace(".pcm", ""));
+//        musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+//        String musicUrl = "/data/user/0/com.kunminx.scaffold.debug/files/20230422_110145.pcm";
+//        musicItem.setUrl(musicUrl);
+//        musicItem.setArtist(artistItem);
+//        musicList.add(musicItem);
+//        System.out.println(musicUrl);
+//      }
+//    }
 
 
     // TestAlbum
