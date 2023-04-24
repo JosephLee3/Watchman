@@ -45,6 +45,9 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:src="@drawable/bg_home" />
 
+
+    <!-- 播放列表 begin -->
+
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -73,6 +76,7 @@
         tools:text="summary" />
 
     </LinearLayout>
+    <!-- 播放列表 end -->
 
     <net.steamcrafted.materialiconlib.MaterialIconView
       android:id="@+id/iv_play_status"
