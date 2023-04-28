@@ -151,7 +151,7 @@ public class DataRepository {
     if (pcmFileList != null) {
       for (int i=0; i<pcmFileList.size(); i++) {
         musicItem = new TestAlbum.TestMusic();
-        musicItem.setMusicId("00" + (i+5));
+        musicItem.setMusicId("00" + (i+4));
         musicItem.setTitle(pcmFileList.get(0).getName());
         musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
         musicItem.setUrl("bensound-sunny.mp3");

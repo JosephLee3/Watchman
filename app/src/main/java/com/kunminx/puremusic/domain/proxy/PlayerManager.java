@@ -18,6 +18,7 @@ package com.kunminx.puremusic.domain.proxy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.kunminx.player.PlayerController;
@@ -93,7 +94,9 @@ public class PlayerManager implements IPlayController<TestAlbum, TestAlbum.TestM
 
   @Override
   public void playAudio(int albumIndex) {
-    mController.playAudio(albumIndex);
+    // TODO
+    Log.d("playAudio", "===========================");
+//    mController.playAudio(albumIndex);
   }
 
   @Override
