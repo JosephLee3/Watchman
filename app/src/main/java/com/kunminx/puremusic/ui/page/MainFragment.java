@@ -66,8 +66,20 @@ public class MainFragment extends BaseFragment {
   protected DataBindingConfig getDataBindingConfig() {
     mAdapter = new PlaylistAdapter(getContext());
     mAdapter.setOnItemClickListener((viewId, item, position) -> {
+      System.out.println(" ------------------ getDataBindingConfig ------------------ ");
       PlayerManager.getInstance().playAudio(position);
-//      this.playPcmFile();
+//      PlayerManager.getInstance().playAudio(position, item.getTitle());
+      //
+
+//      this.checkInstance();
+//      String pcmFileName = audioRecorder.getLastPcmFile();
+////      String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
+//      if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
+//        audioRecorder.playPcmFile(pcmFileName);
+//      } else {
+//        Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
+//      }
+      //
     });
 
     return new DataBindingConfig(R.layout.fragment_main, BR.vm, mStates)
@@ -170,10 +182,10 @@ public class MainFragment extends BaseFragment {
 
     public void playPcmFile() {
       this.checkInstance();
-      String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
-      audioRecorder.getLastPcmFile();
+      String pcmFileName = audioRecorder.getLastPcmFile();
+//      String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
       if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
-//        audioRecorder.playPcmFile(pcmFileName);
+        audioRecorder.playPcmFile(pcmFileName);
       } else {
         Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
       }

@@ -180,11 +180,11 @@ public class AudioRecorder {
 
 
   // Get last pcm audio file
-  public void getLastPcmFile() {
+  public String getLastPcmFile() {
+    String lastFileName = "";
     Log.d("AudioRecorder", "=== getLastPcmFile ===");
     try {
       List<File> fileList = FileUtil.getPcmFiles();
-      String lastFileName = "";
       String tmpName = "";
       for (File file : fileList) {
         tmpName = file.getName();
@@ -196,6 +196,8 @@ public class AudioRecorder {
       System.out.println("lastFileName=" + lastFileName);
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      return lastFileName;
     }
   }
 
