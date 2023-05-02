@@ -67,6 +67,7 @@ public class MainFragment extends BaseFragment {
     mAdapter = new PlaylistAdapter(getContext());
     mAdapter.setOnItemClickListener((viewId, item, position) -> {
       PlayerManager.getInstance().playAudio(position);
+//      this.playPcmFile();
     });
 
     return new DataBindingConfig(R.layout.fragment_main, BR.vm, mStates)
@@ -132,7 +133,7 @@ public class MainFragment extends BaseFragment {
      * record
      */
     public void record() {
-      checkInstance();
+      this.checkInstance();
       String recordName = new SimpleDateFormat("yyyyMMdd_hhmmss").format(new Date());
       audioRecorder.createDefaultAudio(recordName);
       audioRecorder.startRecord(null);
@@ -153,24 +154,26 @@ public class MainFragment extends BaseFragment {
      * stopRecord
      */
     public void stopRecord() {
-      checkInstance();
+      this.checkInstance();
       audioRecorder.stopRecord();
 //      audioRecorder.release();
       Log.i("record", "stopRecord");
+      mMusicRequester.requestAudioList ();
     }
 
 
     public void getPcmFiles() {
-      checkInstance();
+      this.checkInstance();
       audioRecorder.getPcmFiles();
     }
 
 
     public void playPcmFile() {
-      checkInstance();
+      this.checkInstance();
       String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
+      audioRecorder.getLastPcmFile();
       if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
-        audioRecorder.playPcmFile(pcmFileName);
+//        audioRecorder.playPcmFile(pcmFileName);
       } else {
         Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
       }

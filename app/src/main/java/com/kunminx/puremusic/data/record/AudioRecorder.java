@@ -151,6 +151,7 @@ public class AudioRecorder {
    */
   public void stopRecord() {
     Log.d("AudioRecorder", "===stopRecord===");
+    this.getStatus();
     if (status == Status.STATUS_NO_READY || status == Status.STATUS_READY) {
       throw new IllegalStateException("录音尚未开始");
     } else {
@@ -172,6 +173,27 @@ public class AudioRecorder {
         System.out.println(fileList.get(i).getName());
         ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
       }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  // Get last pcm audio file
+  public void getLastPcmFile() {
+    Log.d("AudioRecorder", "=== getLastPcmFile ===");
+    try {
+      List<File> fileList = FileUtil.getPcmFiles();
+      String lastFileName = "";
+      String tmpName = "";
+      for (File file : fileList) {
+        tmpName = file.getName();
+        int result = tmpName.compareTo(lastFileName);
+        if (result > 0) {
+          lastFileName = tmpName;
+        }
+      }
+      System.out.println("lastFileName=" + lastFileName);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -315,7 +337,7 @@ public class AudioRecorder {
 
   public void playPcmFile(String pcmFileName) {
     PlayPCM mPlayPCM = new PlayPCM();
-    mPlayPCM.playPcmFile(pcmFileName);
+    mPlayPCM.playPcmFile(ConfigValue.APP_AUDIO_PATH, pcmFileName);
   }
 
   /**
@@ -364,6 +386,7 @@ public class AudioRecorder {
    * @return
    */
   public Status getStatus() {
+    Log.d("AudioRecorder Status:", this.status.name());
     return status;
   }
 

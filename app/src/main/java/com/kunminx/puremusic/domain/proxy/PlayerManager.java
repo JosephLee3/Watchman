@@ -28,6 +28,8 @@ import com.kunminx.player.contract.IPlayController;
 import com.kunminx.player.contract.IServiceNotifier;
 import com.kunminx.player.domain.PlayerInfoDispatcher;
 import com.kunminx.puremusic.data.bean.TestAlbum;
+import com.kunminx.puremusic.data.record.AudioRecorder;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 import com.kunminx.puremusic.ui.widget.PlayerService;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
@@ -92,11 +94,24 @@ public class PlayerManager implements IPlayController<TestAlbum, TestAlbum.TestM
     mController.playAudio();
   }
 
+
+  AudioRecorder audioRecorder = null;
+  public void initRecord() {
+    audioRecorder = AudioRecorder.getInstance();
+    Log.i("record", "initRecord...");
+  }
+
   @Override
   public void playAudio(int albumIndex) {
-    // TODO
     Log.d("playAudio", "===========================");
 //    mController.playAudio(albumIndex);
+
+    String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
+    if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
+      audioRecorder.playPcmFile(pcmFileName);
+    } else {
+      Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
+    }
   }
 
   @Override

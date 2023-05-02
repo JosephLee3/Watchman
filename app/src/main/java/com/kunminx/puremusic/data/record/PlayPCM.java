@@ -7,7 +7,6 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.util.Log;
 
-import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,11 +17,15 @@ public class PlayPCM {
   AudioTrack audioTrack;
   Boolean isPlaying = false;
   Boolean isStop = false;
-  String pcmFileName = ""; //20230417_115620.pcm
+  // 当前播放的pcm文件路径
+  String pcmFilePath = "";
+  // 当前播放的pcm文件名
+  String pcmFileName = ""; // 20230417_115620.pcm
 
 
 
-  public void playPcmFile(String pcmFileName) {
+  public void playPcmFile(String pcmFilePath, String pcmFileName) {
+    this.pcmFilePath = pcmFilePath;
     this.pcmFileName = pcmFileName;
     Runnable playPCMRecord = this.playPCMRecord;
     playPCMRecord.run();
@@ -41,7 +44,7 @@ public class PlayPCM {
       FileInputStream fis = null;
       try {
         audioTrack.play();
-        fis = new FileInputStream(ConfigValue.APP_AUDIO_PATH + pcmFileName);
+        fis = new FileInputStream(pcmFilePath + pcmFileName);
         byte[] buffer = new byte[bufferSize];
         int len = 0;
         isPlaying = true;

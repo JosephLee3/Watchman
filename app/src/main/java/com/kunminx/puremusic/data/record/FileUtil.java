@@ -119,7 +119,6 @@ public class FileUtil {
       for (File file : files) {
         list.add(file);
       }
-
     }
     return list;
 
