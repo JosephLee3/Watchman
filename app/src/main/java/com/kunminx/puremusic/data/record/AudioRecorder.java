@@ -173,6 +173,10 @@ public class AudioRecorder {
         System.out.println(fileList.get(i).getName());
         ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
       }
+      //
+//      File testFile = fileList.get(0);
+//      System.out.println("=== testFile ===");
+//      System.out.println(testFile.getTotalSpace());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -337,9 +341,10 @@ public class AudioRecorder {
   }
 
 
-  public void playPcmFile(String pcmFileName) {
-    PlayPCM mPlayPCM = new PlayPCM();
-    mPlayPCM.playPcmFile(ConfigValue.APP_AUDIO_PATH, pcmFileName);
+  public void playPcmFile(String pcmUrl) {
+    new PlayPCM().playPcmFile(pcmUrl);
+//    PlayPCM mPlayPCM = new PlayPCM();
+//    mPlayPCM.playPcmFile(pcmUrl);
   }
 
   /**

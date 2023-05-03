@@ -33,6 +33,7 @@ import com.kunminx.puremusic.data.bean.LibraryInfo;
 import com.kunminx.puremusic.data.bean.TestAlbum;
 import com.kunminx.puremusic.data.bean.User;
 import com.kunminx.puremusic.data.record.FileUtil;
+import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -98,6 +99,7 @@ public class DataRepository {
    * @param result
    */
   public void getAudioList(DataResult.Result<TestAlbum> result) {
+    String pcmFilePath = ConfigValue.APP_AUDIO_PATH;
     List<File> pcmFileList = null;
 
     try {
@@ -108,7 +110,7 @@ public class DataRepository {
 
     // artistItem
     TestAlbum.TestArtist artistItem = new TestAlbum.TestArtist();
-    artistItem.setName("Angle");
+//    artistItem.setName("Angle"); + " · "
 
     // musicList
     List<TestAlbum.TestMusic> musicList = new ArrayList<>();
@@ -138,28 +140,28 @@ public class DataRepository {
 //    musicList.add(musicItem);
 
 
+
+
     // musicItem: 4 - 0
-    musicItem = new TestAlbum.TestMusic();
-    musicItem.setMusicId("004");
-    musicItem.setTitle("Studio");
-    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-    musicItem.setUrl("bensound-sunny.mp3");
-    musicItem.setArtist(artistItem);
-    musicList.add(musicItem);
+//    musicItem = new TestAlbum.TestMusic();
+//    musicItem.setMusicId("004");
+//    musicItem.setTitle("Studio");
+//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+//    musicItem.setUrl("bensound-sunny.mp3");
+//    musicItem.setArtist(artistItem);
+//    musicList.add(musicItem);
 
     // pcmFile: 4
     if (pcmFileList != null) {
       for (int i=0; i<pcmFileList.size(); i++) {
         musicItem = new TestAlbum.TestMusic();
-        musicItem.setMusicId("00" + (i+4));
+        musicItem.setMusicId("" + i);
         musicItem.setTitle(pcmFileList.get(i).getName());
         musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-        musicItem.setUrl("bensound-sunny.mp3");
+        musicItem.setUrl(pcmFilePath + pcmFileList.get(i).getName());
+        artistItem.setName("Angle" + " · ");
         musicItem.setArtist(artistItem);
         musicList.add(musicItem);
-
-
-        System.out.println(pcmFileList.get(0).getName());
       }
     }
 
@@ -169,8 +171,8 @@ public class DataRepository {
     mTestAlbum.setAlbumId("001");
     mTestAlbum.setTitle("Cute");
     mTestAlbum.setSummary("BenSound");
-    mTestAlbum.setArtist(artistItem); // 灌入ArtistItem
-    mTestAlbum.setMusics(musicList); // MusicItem
+    mTestAlbum.setArtist(artistItem); // 灌入ArtistItem艺术家
+    mTestAlbum.setMusics(musicList); // MusicItem音乐名
     mTestAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
 
 

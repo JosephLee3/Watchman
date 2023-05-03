@@ -21,14 +21,22 @@ public class PlayPCM {
   String pcmFilePath = "";
   // 当前播放的pcm文件名
   String pcmFileName = ""; // 20230417_115620.pcm
+  String pcmUrl = ""; //
 
 
 
-  public void playPcmFile(String pcmFilePath, String pcmFileName) {
-    this.pcmFilePath = pcmFilePath;
-    this.pcmFileName = pcmFileName;
-    Runnable playPCMRecord = this.playPCMRecord;
-    playPCMRecord.run();
+  public void playPcmFile(String pcmUrl) {
+    this.pcmUrl = pcmUrl;
+    try {
+      Runnable playPCMRecord = this.playPCMRecord;
+      playPCMRecord.run();
+    } catch (NullPointerException e) {
+      Log.e("Exception", e.getMessage());
+//      e.printStackTrace();
+    } catch (Exception e) {
+      Log.e("Exception", e.getMessage());
+//      e.printStackTrace();
+    }
   }
 
 
@@ -44,16 +52,19 @@ public class PlayPCM {
       FileInputStream fis = null;
       try {
         audioTrack.play();
-        fis = new FileInputStream(pcmFilePath + pcmFileName);
+        fis = new FileInputStream(pcmUrl);
         byte[] buffer = new byte[bufferSize];
         int len = 0;
         isPlaying = true;
+        int lengthTotal = 0;
         while ((len = fis.read(buffer)) != -1 && !isStop) {
-//                    Log.d(TAG, "playPCMRecord: len " + len);
           audioTrack.write(buffer, 0, len);
+          lengthTotal = len;
         }
+        Log.d(TAG, "PlayPcm : lengthTotal=" + lengthTotal);
         Log.i("PlayPcm : ", "-------------------------------------");
         Log.i("PlayPcm : ", "Pcm File is Playing.");
+        Log.i("PlayPcm : ", "pcmUrl: " + pcmUrl);
         Log.i("PlayPcm : ", "-------------------------------------");
 
       } catch (Exception e) {

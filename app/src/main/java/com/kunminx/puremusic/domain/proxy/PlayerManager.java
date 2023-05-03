@@ -103,6 +103,19 @@ public class PlayerManager implements IPlayController<TestAlbum, TestAlbum.TestM
 
   @Override
   public void playAudio(int albumIndex) {
+//    Log.d("playAudio", "===========================");
+    mController.playAudio(albumIndex);
+
+//    String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
+//    if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
+////      audioRecorder.playPcmFile(pcmFileName);
+//    } else {
+//      Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
+//    }
+  }
+/*
+
+  public void playAudioForPcm(int albumIndex) {
     Log.d("playAudio", "===========================");
 //    mController.playAudio(albumIndex);
 
@@ -113,6 +126,7 @@ public class PlayerManager implements IPlayController<TestAlbum, TestAlbum.TestM
       Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
     }
   }
+*/
 
   @Override
   public void playNext() {

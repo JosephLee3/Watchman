@@ -62,30 +62,47 @@ public class MainFragment extends BaseFragment {
     mMusicRequester = getFragmentScopeViewModel(MusicRequester.class);
   }
 
+
+
   @Override
   protected DataBindingConfig getDataBindingConfig() {
     mAdapter = new PlaylistAdapter(getContext());
     mAdapter.setOnItemClickListener((viewId, item, position) -> {
       System.out.println(" ------------------ getDataBindingConfig ------------------ ");
-      PlayerManager.getInstance().playAudio(position);
-//      PlayerManager.getInstance().playAudio(position, item.getTitle());
-      //
-
-//      this.checkInstance();
-//      String pcmFileName = audioRecorder.getLastPcmFile();
-////      String pcmFileName = ConfigValue.AUDIO_FILE_NAME;
-//      if (pcmFileName != null && !"".equals(pcmFileName) && pcmFileName.length() != 0) {
-//        audioRecorder.playPcmFile(pcmFileName);
-//      } else {
-//        Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
-//      }
-      //
+//      PlayerManager.getInstance().playAudio(position);
+      this.playPcmFile(item.getUrl());
     });
 
     return new DataBindingConfig(R.layout.fragment_main, BR.vm, mStates)
       .addBindingParam(BR.click, new ClickProxy())
       .addBindingParam(BR.adapter, mAdapter);
   }
+
+
+  // PCM
+  AudioRecorder audioRecorder;
+  public void checkInstance() {
+    if (null == audioRecorder) {
+      initRecord();
+    }
+  }
+  /**
+   * 初始化录音
+   */
+  public void initRecord() {
+    audioRecorder = AudioRecorder.getInstance();
+    Log.i("record", "initRecord...");
+  }
+  public void playPcmFile(String pcmUrl) {
+    this.checkInstance();
+    if (pcmUrl != null && !"".equals(pcmUrl) && pcmUrl.length() != 0) {
+      audioRecorder.playPcmFile(pcmUrl);
+    } else {
+      Log.e("PlayPcm : ", "Error: pcmUrl is empty.");
+    }
+  }
+
+
 
   @SuppressLint("NotifyDataSetChanged")
   @Override
