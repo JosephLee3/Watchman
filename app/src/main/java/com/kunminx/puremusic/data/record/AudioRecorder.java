@@ -157,7 +157,7 @@ public class AudioRecorder {
     } else {
       audioRecord.stop();
       status = Status.STATUS_STOP;
-      ConfigValue.AUDIO_FILE_NAME = ConfigValue.RECORDING_AUDIO_FILE_NAME;
+//      ConfigValue.AUDIO_FILE_NAME = ConfigValue.RECORDING_AUDIO_FILE_NAME;
       release();
     }
   }
@@ -171,12 +171,16 @@ public class AudioRecorder {
       Log.d("AudioRecorder", fileList.get(0).getParent());
       for (int i=0; i<fileList.size(); i++) {
         System.out.println(fileList.get(i).getName());
-        ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
+//        ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
       }
+      // 20230504_081437.pcm
+      String pcmFileName = fileList.get(0).getName();
+      String dateStr = pcmFileName.substring(0, 8);
+      String timeStr = pcmFileName.substring(9, 15);
       //
 //      File testFile = fileList.get(0);
-//      System.out.println("=== testFile ===");
-//      System.out.println(testFile.getTotalSpace());
+      System.out.println("=== testFile ===");
+      System.out.println(dateStr + " " + timeStr);
     } catch (Exception e) {
       e.printStackTrace();
     }

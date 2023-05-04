@@ -143,13 +143,13 @@ public class DataRepository {
 
 
     // musicItem: 4 - 0
-//    musicItem = new TestAlbum.TestMusic();
-//    musicItem.setMusicId("004");
-//    musicItem.setTitle("Studio");
-//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-//    musicItem.setUrl("bensound-sunny.mp3");
-//    musicItem.setArtist(artistItem);
-//    musicList.add(musicItem);
+    musicItem = new TestAlbum.TestMusic();
+    musicItem.setMusicId("004");
+    musicItem.setTitle("Studio");
+    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+    musicItem.setUrl("bensound-sunny.mp3");
+    musicItem.setArtist(artistItem);
+    musicList.add(musicItem);
 
     // pcmFile: 4
     if (pcmFileList != null) {
@@ -158,7 +158,11 @@ public class DataRepository {
         musicItem.setMusicId("" + i);
         musicItem.setTitle(pcmFileList.get(i).getName());
         musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+        String pcmFileName = pcmFileList.get(i).getName();
         musicItem.setUrl(pcmFilePath + pcmFileList.get(i).getName());
+        // 20230504_081437.pcm
+//        String dateStr = pcmFileName.substring(0, 8);
+        //
         artistItem.setName("Angle" + " · ");
         musicItem.setArtist(artistItem);
         musicList.add(musicItem);
@@ -168,14 +172,14 @@ public class DataRepository {
 
     // TestAlbum
     TestAlbum mTestAlbum = new TestAlbum();
-    mTestAlbum.setAlbumId("001");
-    mTestAlbum.setTitle("Cute");
-    mTestAlbum.setSummary("BenSound");
-    mTestAlbum.setArtist(artistItem); // 灌入ArtistItem艺术家
-    mTestAlbum.setMusics(musicList); // MusicItem音乐名
-    mTestAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
-
-
+    if (musicList.size() > 0) {
+      mTestAlbum.setAlbumId("001");
+      mTestAlbum.setTitle("Cute");
+      mTestAlbum.setSummary("BenSound");
+      mTestAlbum.setArtist(artistItem); // 灌入ArtistItem艺术家
+      mTestAlbum.setMusics(musicList); // MusicItem音乐名
+      mTestAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
+    }
     result.onResult(new DataResult<>(mTestAlbum, new ResponseStatus()));
   }
 
