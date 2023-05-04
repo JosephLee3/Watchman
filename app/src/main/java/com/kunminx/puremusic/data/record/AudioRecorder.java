@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.kunminx.puremusic.MainActivity;
+import com.kunminx.puremusic.data.convert.DateConvert;
 import com.kunminx.puremusic.domain.event.ConfigValue;
 
 import java.io.BufferedInputStream;
@@ -23,8 +24,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 /**
  * 实现录音
@@ -173,14 +177,8 @@ public class AudioRecorder {
         System.out.println(fileList.get(i).getName());
 //        ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
       }
-      // 20230504_081437.pcm
-      String pcmFileName = fileList.get(0).getName();
-      String dateStr = pcmFileName.substring(0, 8);
-      String timeStr = pcmFileName.substring(9, 15);
-      //
-//      File testFile = fileList.get(0);
-      System.out.println("=== testFile ===");
-      System.out.println(dateStr + " " + timeStr);
+//      String pcmFileName = fileList.get(0).getName();
+//      new DateConvert().pcmNameToDateTimeStr(pcmFileName);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -345,7 +343,7 @@ public class AudioRecorder {
   }
 
 
-  public void playPcmFile(String pcmUrl) {
+  public void  playPcmFile(String pcmUrl) {
     new PlayPCM().playPcmFile(pcmUrl);
 //    PlayPCM mPlayPCM = new PlayPCM();
 //    mPlayPCM.playPcmFile(pcmUrl);

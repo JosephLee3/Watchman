@@ -32,6 +32,7 @@ import com.kunminx.puremusic.data.bean.DownloadState;
 import com.kunminx.puremusic.data.bean.LibraryInfo;
 import com.kunminx.puremusic.data.bean.TestAlbum;
 import com.kunminx.puremusic.data.bean.User;
+import com.kunminx.puremusic.data.convert.DateConvert;
 import com.kunminx.puremusic.data.record.FileUtil;
 import com.kunminx.puremusic.domain.event.ConfigValue;
 
@@ -143,13 +144,13 @@ public class DataRepository {
 
 
     // musicItem: 4 - 0
-    musicItem = new TestAlbum.TestMusic();
-    musicItem.setMusicId("004");
-    musicItem.setTitle("Studio");
-    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
-    musicItem.setUrl("bensound-sunny.mp3");
-    musicItem.setArtist(artistItem);
-    musicList.add(musicItem);
+//    musicItem = new TestAlbum.TestMusic();
+//    musicItem.setMusicId("004");
+//    musicItem.setTitle("Studio");
+//    musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+//    musicItem.setUrl("bensound-sunny.mp3");
+//    musicItem.setArtist(artistItem);
+//    musicList.add(musicItem);
 
     // pcmFile: 4
     if (pcmFileList != null) {
@@ -160,10 +161,8 @@ public class DataRepository {
         musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
         String pcmFileName = pcmFileList.get(i).getName();
         musicItem.setUrl(pcmFilePath + pcmFileList.get(i).getName());
-        // 20230504_081437.pcm
-//        String dateStr = pcmFileName.substring(0, 8);
-        //
-        artistItem.setName("Angle" + " · ");
+        String dateTimeStr = new DateConvert().pcmNameToDateTimeStr(pcmFileName);
+        artistItem.setName("Angle" + " · " + dateTimeStr);
         musicItem.setArtist(artistItem);
         musicList.add(musicItem);
       }

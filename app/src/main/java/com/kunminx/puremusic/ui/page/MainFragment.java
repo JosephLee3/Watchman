@@ -163,7 +163,7 @@ public class MainFragment extends BaseFragment {
      */
     public void record() {
       this.checkInstance();
-      String recordName = new SimpleDateFormat("yyyyMMdd_hhmmss").format(new Date());
+      String recordName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
       audioRecorder.createDefaultAudio(recordName);
       audioRecorder.startRecord(null);
       Log.i("record", "Record");
