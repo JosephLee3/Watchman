@@ -17,6 +17,9 @@
 package com.kunminx.puremusic.ui.page;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -191,10 +194,33 @@ public class MainFragment extends BaseFragment {
     }
 
 
+
     public void getPcmFiles() {
       this.checkInstance();
+//      this.systemAudioModelCheck();
       audioRecorder.getPcmFiles();
     }
+
+
+
+    public void systemAudioModelCheck() {
+      AudioManager mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
+      int systemAudioModel = mAudioManager.getMode();
+      // 0: normal
+      // 0: recording
+      Log.d("systemAudioModel:", "-----------------------------------------------");
+      Log.d("systemAudioModel:", "curModel=" + systemAudioModel);
+      Log.d("systemAudioModel:", "curVolume=" + mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+      // Set music volume
+      mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 3, AudioManager.FLAG_SHOW_UI);
+      Log.d("systemAudioModel:", "curVolume=" + mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        Log.d("systemAudioModel:", "cur devices activity audio play config=" + mAudioManager.getActivePlaybackConfigurations());
+      }
+
+      Log.d("systemAudioModel:", "-----------------------------------------------");
+    }
+
 
 
     public void playPcmFile() {

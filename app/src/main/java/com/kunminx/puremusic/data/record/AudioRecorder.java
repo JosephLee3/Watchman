@@ -5,6 +5,7 @@ import static net.steamcrafted.materialiconlib.MaterialDrawableBuilder.IconValue
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Environment;
@@ -173,12 +174,9 @@ public class AudioRecorder {
     try {
       List<File> fileList = FileUtil.getPcmFiles();
       Log.d("AudioRecorder", fileList.get(0).getParent());
-      for (int i=0; i<fileList.size(); i++) {
-        System.out.println(fileList.get(i).getName());
-//        ConfigValue.AUDIO_FILE_NAME = fileList.get(fileList.size()-1).getName();
-      }
-//      String pcmFileName = fileList.get(0).getName();
-//      new DateConvert().pcmNameToDateTimeStr(pcmFileName);
+//      for (int i=0; i<fileList.size(); i++) {
+//        System.out.println(fileList.get(i).getName());
+//      }
     } catch (Exception e) {
       e.printStackTrace();
     }
