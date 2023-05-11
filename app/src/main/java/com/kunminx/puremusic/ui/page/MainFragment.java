@@ -69,7 +69,9 @@ public class MainFragment extends BaseFragment {
 
   @Override
   protected DataBindingConfig getDataBindingConfig() {
-    mAdapter = new PlaylistAdapter(getContext());
+    mAdapter = new PlaylistAdapter(getContext()); //绑定 adapter_play_item循环列表
+
+
     mAdapter.setOnItemClickListener((viewId, item, position) -> {
       System.out.println(" ------------------ getDataBindingConfig ------------------ ");
 //      PlayerManager.getInstance().playAudio(position);
@@ -232,6 +234,13 @@ public class MainFragment extends BaseFragment {
       } else {
         Log.e("PlayPcm : ", "Error.Pcm File Name is empty.");
       }
+    }
+
+
+
+    public void hymn() {
+      this.checkInstance();
+      audioRecorder.hymn();
     }
 
 

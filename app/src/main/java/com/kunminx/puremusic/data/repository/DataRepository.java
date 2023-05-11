@@ -162,9 +162,11 @@ public class DataRepository {
         String pcmFileName = pcmFileList.get(i).getName();
         musicItem.setUrl(pcmFilePath + pcmFileList.get(i).getName());
         String dateTimeStr = new DateConvert().pcmNameToDateTimeStr(pcmFileName);
-        artistItem.setName("Angle" + " · " + dateTimeStr);
+        artistItem.setName("Angle" + " · " + i);
+//        artistItem.setName("Angle" + " · " + dateTimeStr);
         musicItem.setArtist(artistItem);
         musicList.add(musicItem);
+        Log.d("", "");
       }
     }
 

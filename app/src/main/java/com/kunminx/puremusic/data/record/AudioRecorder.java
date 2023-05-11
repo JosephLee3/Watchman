@@ -25,6 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -203,6 +205,56 @@ public class AudioRecorder {
     } finally {
       return lastFileName;
     }
+  }
+
+
+
+  /**
+   * Hymn
+   */
+  public void hymn() {
+    Log.d("AudioRecorder", "=== hymn ===");
+
+    String path = "";
+    Boolean flag = false;
+    File file;
+    if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+      // 没有挂载
+//       path  = Environment.getExternalStorageDirectory() + "/Hymn";
+    } else {
+      // 挂载了
+//       path  = Environment.getExternalStorageDirectory() + "/Hymn";
+    }
+    path  = Environment.getExternalStorageDirectory() + "/Hymn";
+    file = new File(path);
+    if(!file.exists()){
+      //创建文件夹
+      file.mkdirs();
+    }else{
+      path = path  + "hymn.txt";
+    }
+    file = new File(path);
+    if(file.exists()){
+      //创建文件
+      Writer write = null;
+      try {
+        file.createNewFile();
+        write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+        write.write(JSON.toString()); //jsonObject
+        write.flush();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      } finally {
+        Log.d("AudioRecorder : ", path);
+        try {
+          write.close();
+          file = null;
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+
   }
 
 

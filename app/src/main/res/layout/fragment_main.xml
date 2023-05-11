@@ -218,6 +218,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+          <Button
+            android:text="Hymn"
+            android:textAllCaps="false"
+            onClickWithDebouncing="@{()->click.hymn()}"
+            android:layout_margin="31dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
 
           <!--<TextView

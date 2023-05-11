@@ -65,6 +65,7 @@
         android:textSize="18sp"
         tools:text="title" />
 
+<!--      android:text="@{album.artist.name}"-->
       <TextView
         android:id="@+id/tv_artist"
         android:layout_width="wrap_content"
