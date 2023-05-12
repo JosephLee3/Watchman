@@ -34,6 +34,16 @@ public class TestAlbum extends BaseAlbumItem<TestAlbum.TestMusic, TestAlbum.Test
   public static class TestMusic extends BaseMusicItem<TestArtist> {
 
     private String songMid;
+    //
+    private String musicRemark;
+
+    public String getMusicRemark() {
+      return musicRemark;
+    }
+
+    public void setMusicRemark(String musicRemark) {
+      this.musicRemark = musicRemark;
+    }
 
     public String getSongMid() {
       return songMid;

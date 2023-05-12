@@ -156,17 +156,17 @@ public class DataRepository {
     if (pcmFileList != null) {
       for (int i=0; i<pcmFileList.size(); i++) {
         musicItem = new TestAlbum.TestMusic();
-        musicItem.setMusicId("" + i);
-        musicItem.setTitle(pcmFileList.get(i).getName());
-        musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
         String pcmFileName = pcmFileList.get(i).getName();
-        musicItem.setUrl(pcmFilePath + pcmFileList.get(i).getName());
+        musicItem.setMusicId(pcmFileName.replace(".pcm", ""));
+        musicItem.setTitle(pcmFileName);
+        musicItem.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-9f034d4886c8fe77.png");
+        musicItem.setUrl(pcmFilePath + pcmFileName);
         String dateTimeStr = new DateConvert().pcmNameToDateTimeStr(pcmFileName);
-        artistItem.setName("Angle" + " · " + i);
-//        artistItem.setName("Angle" + " · " + dateTimeStr);
+        Log.d("dateTimeStr------------------------->   {}", dateTimeStr);
+//        artistItem.setName("Angle" + " · " + i);
+        musicItem.setMusicRemark("Angle" + " · " + dateTimeStr);
         musicItem.setArtist(artistItem);
         musicList.add(musicItem);
-        Log.d("", "");
       }
     }
 
@@ -177,7 +177,7 @@ public class DataRepository {
       mTestAlbum.setAlbumId("001");
       mTestAlbum.setTitle("Cute");
       mTestAlbum.setSummary("BenSound");
-      mTestAlbum.setArtist(artistItem); // 灌入ArtistItem艺术家
+//      mTestAlbum.setArtist(artistItem); // 灌入ArtistItem艺术家
       mTestAlbum.setMusics(musicList); // MusicItem音乐名
       mTestAlbum.setCoverImg("https://upload-images.jianshu.io/upload_images/57036-570ed96eb055ef17.png");
     }

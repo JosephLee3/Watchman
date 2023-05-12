@@ -4,13 +4,21 @@ import static net.steamcrafted.materialiconlib.MaterialDrawableBuilder.IconValue
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioPlaybackCaptureConfiguration;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.kunminx.puremusic.MainActivity;
 import com.kunminx.puremusic.data.convert.DateConvert;
@@ -22,6 +30,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -208,13 +217,51 @@ public class AudioRecorder {
   }
 
 
-
+//  ProjectionManage mProjectionManage = new ProjectionManage();
   /**
    * Hymn
    */
   public void hymn() {
     Log.d("AudioRecorder", "=== hymn ===");
 
+//    mProjectionManager = ContextCompat.getSystemService(MediaProjectionManager.class);
+//
+//    Intent screenCaptureIntent = mProjectionManager.createCcreenCaptureIntent();
+//
+//    startActivityForResult(screenCaptureIntent,1);
+
+    // Create file
+    File file = new File("/storage/emulated/0/example.txt");
+
+    try {
+      // Create file and write content
+      FileWriter writer = new FileWriter(file);
+      writer.write("This is an example text file.");
+      writer.flush();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+//      Toast.makeText(this, "Error creating file", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     String path = "";
     Boolean flag = false;
     File file;
@@ -225,7 +272,7 @@ public class AudioRecorder {
       // 挂载了
 //       path  = Environment.getExternalStorageDirectory() + "/Hymn";
     }
-    path  = Environment.getExternalStorageDirectory() + "/Hymn";
+    path  = Environment.getExternalStorageDirectory() + "/Hymn"; //  /storage/emulated/0/Hymn
     file = new File(path);
     if(!file.exists()){
       //创建文件夹
@@ -253,9 +300,54 @@ public class AudioRecorder {
           throw new RuntimeException(e);
         }
       }
-    }
-
+    }*/
   }
+
+
+
+//  protected void onActivityReslut(int requestCode, int resultCode, Intent intent){
+//    surper.onActivityReslut(requestCode, resultCode, intent);
+//
+//    MediaProjection mediaProjection = mProjectionManager.getMediaProjection(resultCode, intent);
+//
+//    AudioPlaybackCaptureConfiguration.Builder builder = null;
+//    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+//      builder = new AudioPlaybackCaptureConfiguration.Builder(mediaProjection);
+//    }
+//
+//    builder.addMatchingUsage(AudioAttributes.USAGE_MEDIA);//多媒体
+//
+//    builder.addMatchingUsage(AudioAttributes.USAGE_ALARM);//闹铃
+//
+//    builder.addMatchingUsage(AudioAttributes.USAGE_GAME);//游戏
+//
+////    ...
+//
+////    audioPlaybackCaptureConfiguration = builder.build();
+//
+//
+//
+//    AudioRecord.Builder recorder1 = new AudioRecord.Builder()
+//
+//      .setAudioFormat(new AudioFormat.Builder())
+//
+//      .setEncoding(AudioFormat.EMCODING_PCM_16BIT)
+//
+//      .setSampleRate(48000)  //采样率
+//
+//      .setChannelMask(AudioFormat.CHANNEL_IN_MONO)
+//
+//      .setBufferSizeInBytes(minBufferSize)
+//
+//      .setAudioPlaybackCaptureConfig(audioPlaybackCaptureConfiguration);
+//
+//    mAudioRecorder = recorder.build();
+//
+//    mAudioRecorder.startRecording();
+//
+//
+//  }
+
 
 
 

@@ -33,7 +33,7 @@ public class DateConvert {
     //Mar21 11:37
       SimpleDateFormat showDateFormat = new SimpleDateFormat("MMMd HH:mm");
 //    Log.d("pcmNameToDateTimeStr:", "=== testFile ===");
-    Log.d("pcmNameToDateTimeStr:", showDateFormat.format(date));
+//    Log.d("pcmNameToDateTimeStr:", showDateFormat.format(date));
     return showDateFormat.format(date);
   }
 }
